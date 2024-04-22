@@ -1,67 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css">
-    <title> Dictionary </title>
-</head>
-<body>
-    <section class="container">
-        <header>
-            <h1> Sirrch </h1>
-        </header>
-
-        <main>
-            <section class="textInput">
-                <input type="text" name="word" id="word" placeholder="Search words here...">
-                <button> Search </button>
-            </section>
-             <section class="searchResult">
-                <div class="resultContainer">
-                    <div class="textArea">
-                    <div> <h4> </h4> <p class="phonetic"> </p></div>
-                    <audio src="" id="audio"></audio>
-                    <i class="fa fa-volume-off" id="volume"></i>
-                    </div>
-                    <div class="answer"> 
-                        <em> </em> <br><span class="speechType">  </span>
-                        </div>
-                    <div class="example">
-                       <em> </em> <br> 
-                    </div>
-                </div>
-            </section>
-        
-        </main>
-
-        <footer>
-            <li>
-                <a href="https://www.facebook.com/habibopeyemi.adebayo">
-                    <i class="fa fa-facebook"></i>
-                </a>
-            </li>
-    
-            <li>
-                <a href="https://twitter.com/Habib__001">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            </li>
-    
-            <li>
-                <a href="https://www.github.com/Habib-0007">
-                    <i class="fa fa-github"></i>
-                </a>
-            </li>
-            <li>
-                <a href="https://wa.me/+2349019166356">
-                    <i class="fa fa-whatsapp"></i>
-                </a>
-            </li>
-        </footer>
-    </section>
-    <script src="index.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="index.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+		/>
+		<title> Dictionary </title>
+	</head>
+	<body>
+		<section class="grid">
+			<section class="subgrid">
+				<header>
+					<h1>Sirrch</h1>
+					<div class="toggle">
+						<div class="ball"></div>
+					</div>
+				</header>
+				<main>
+					<div class="search">
+						<input
+							type="text"
+							placeholder="Search for any word..."
+						/>
+						<button
+							class="fa fa-search"
+						></button>
+					</div>
+					<section
+						class="search-result"
+					>
+						<section
+							class="search-head"
+						></section>
+					</section>
+					<section
+						class="search-meanings"
+					></section>
+					<section
+						class="source"
+					></section>
+				</main>
+			</section>
+		</section>
+		<script src="index.js"></script>
+	</body>
 </html>

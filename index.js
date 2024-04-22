@@ -1,53 +1,141 @@
-let searchText = document.querySelector(".textInput input");
-let searchBtn = document.querySelector(".textInput button");
-let searchResult = document.querySelector(".searchResult div");
-let audio = document.querySelector("#audio");
-let volume = document.querySelector("#volume");
-let word = document.querySelector(".textArea h4");
-let answer = document.querySelector(".answer");
-let example = document.querySelector(".example");
-let phonetic = document.querySelector(".phonetic");
-let speechType = document.querySelector(".speechType");
+var toggleBtn = document.querySelector(
+	"header .toggle"
+);
+var searchText = document.querySelector(
+	".search input"
+);
+var searchBtn = document.querySelector(
+	".search button"
+);
+var searchHead = document.querySelector(
+	".search-head"
+);
+var searchMeanings =
+	document.querySelector(
+		".search-meanings"
+	);
+var sources =
+	document.querySelector(".source");
 
+const toggleInterface = () => {
+	const toggleBall =
+		toggleBtn.querySelector(".ball");
+	toggleBall.classList.toggle("dark");
+	document.body.classList.toggle(
+		"dark"
+	);
+};
+const fetchData = async () => {
+	try {
+		const res = await fetch(
+			`https://api.dictionaryapi.dev/api/v2/entries/en/${searchText.value}`
+		);
+		const data = await res.json();
+		searchWord(data[0]);
+	} catch (err) {
+		searchWord(err.message);
+	}
+};
 
+const searchWord = data => {
+	if (data == undefined) {
+		alert("Not Found");
+	} else {
+		searchHead.innerHTML = `
+	<div>
+		<strong>${data?.word}</strong>
+		<p>${data?.phonetic}</p>
+	</div>
+	<button class="fa fa-play"></button>
+	`;
 
-function searchWord() {
-	fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchText.value}`)
-		.then(response => response.json())
-		.then(data => {
-		speechType = data[0].meanings[0].partOfSpeech;
-		phonetic.innerText = `${data[0].phonetics[0].text} ${data[0].phonetics[1].text}`;
-		word.innerText = searchText.value;
-		answer.innerHTML=`<em> Definition: </em> <br> 1. ${data[0].meanings[0].definitions[0].definition} &nbsp; <span class="speechType"> ${speechType} </span> <br> 2. ${data[0].meanings[1].definitions[0].definition} &nbsp; <span class="speechType"> ${data[0].meanings[1].partOfSpeech} </span>`;
-		 example.innerHTML = `<em> Example: </em> <br> • ${data[0].meanings[0].definitions[1].example}`; 
-		
-		function play() {
-    volume.classList.remove("fa-volume-off");
-		volume.classList.add("fa-volume-up");
-		    audio.src = data[0].phonetics[0].audio;
-		audio.play();
-}
+		data?.meanings?.forEach(meaning => {
+			const eachMeaning =
+				document.createElement(
+					"section"
+				);
+			eachMeaning.innerHTML = `
+		<div class="search-subhead">
+			<strong>${meaning?.partOfSpeech} <hr /> </strong>
+			<em>Meaning</em>
+		</div>
+		`;
 
-function stop() {
-    volume.classList.add("fa-volume-off");
-		volume.classList.remove("fa-volume-up");
-}
+			meaning?.definitions?.forEach(
+				def => {
+					const definition =
+						document.createElement(
+							"ul"
+						);
+					definition.innerHTML = `<li>${def?.definition}
+					 </li>
+					 `;
+					eachMeaning.appendChild(
+						definition
+					);
+				}
+			);
 
-volume.addEventListener("click", () => {
+			const synoText =
+				document.createElement(
+					"strong"
+				);
+			synoText.classList.add(
+				"synonyms-text"
+			);
+			synoText.textContent =
+				"Synonyms:";
+			eachMeaning.appendChild(synoText);
 
-    if (volume.classList.contains("fa-volume-off")) {
-        play();
-    }
-    else {
-        stop();
-    }
-    });
-		})
-		.catch(err => console.error(err));
-				
-		searchResult.style.display = "block";
-    setTimeout( () => searchResult.style.opacity = "1", 300);		
+			meaning?.synonyms?.forEach(
+				syn => {
+					const synonyms =
+						document.createElement(
+							"div"
+						);
+					synonyms.classList.add(
+						"synonyms"
+					);
+					if (syn.length > 0) {
+						synonyms.textContent = syn;
+					} else {
+						synonyms.textContent =
+							"none";
+					}
+					eachMeaning.appendChild(
+						synonyms
+					);
+				}
+			);
+			searchMeanings.appendChild(
+				eachMeaning
+			);
+		});
 
-}
+		const srcText =
+			document.createElement("strong");
+		srcText.textContent = "Source: ";
+		sources.appendChild(srcText);
 
-searchBtn.addEventListener("click", searchWord);
+		data?.sourceUrls?.forEach(
+			source => {
+				const src =
+					document.createElement("a");
+				src.href = source;
+				src.textContent = `${source}`;
+				sources.appendChild(src);
+			}
+		);
+	}
+	console.log(data);
+};
+
+toggleBtn.addEventListener(
+	"click",
+	toggleInterface
+);
+
+searchBtn.addEventListener(
+	"click",
+	fetchData
+);
