@@ -7,6 +7,10 @@ var searchText = document.querySelector(
 var searchBtn = document.querySelector(
 	".search button"
 );
+var searchResult =
+	document.querySelector(
+		".search-result"
+	);
 var searchHead = document.querySelector(
 	".search-head"
 );
@@ -16,6 +20,11 @@ var searchMeanings =
 	);
 var sources =
 	document.querySelector(".source");
+var notFound = document.querySelector(
+	".not-found"
+);
+var loading =
+	document.querySelector(".loading");
 
 const toggleInterface = () => {
 	const toggleBall =
@@ -26,12 +35,19 @@ const toggleInterface = () => {
 	);
 };
 const fetchData = async () => {
+	loading.innerHTML = "Loading";
+	loading.style.display = "flex";
+	searchResult.style.display = "none";
+	notFound.style.display = "none";
 	try {
 		const res = await fetch(
 			`https://api.dictionaryapi.dev/api/v2/entries/en/${searchText.value}`
 		);
 		const data = await res.json();
 		searchWord(data[0]);
+		if (data) {
+			loading.style.display = "none";
+		}
 	} catch (err) {
 		searchWord(err.message);
 	}
@@ -39,14 +55,23 @@ const fetchData = async () => {
 
 const searchWord = data => {
 	if (data == undefined) {
-		alert("Not Found");
+		notFound.style.display = "flex";
+		searchResult.style.display = "none";
+		notFound.textContent = "Not Found";
 	} else {
+		notFound.style.display = "none";
+		searchResult.style.display =
+			"block";
 		searchHead.innerHTML = `
-	<div>
-		<strong>${data?.word}</strong>
-		<p>${data?.phonetic}</p>
-	</div>
-	<button class="fa fa-play"></button>
+			<div>
+				<strong>${data?.word}</strong>
+				${
+					data?.phonetic == undefined
+						? ""
+						: `<p>${data?.phonetic}</p>`
+				}
+			</div>
+			<button class="fa fa-play"></button>
 	`;
 
 		data?.meanings?.forEach(meaning => {
