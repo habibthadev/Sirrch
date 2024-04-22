@@ -23,8 +23,10 @@ var sources =
 var notFound = document.querySelector(
 	".not-found"
 );
-var loading =
-	document.querySelector(".loading");
+var loader =
+	document.querySelector(".loader");
+var audio =
+	document.querySelector("#audio");
 
 const toggleInterface = () => {
 	const toggleBall =
@@ -35,8 +37,7 @@ const toggleInterface = () => {
 	);
 };
 const fetchData = async () => {
-	loading.innerHTML = "Loading";
-	loading.style.display = "flex";
+	loader.style.display = "flex";
 	searchResult.style.display = "none";
 	notFound.style.display = "none";
 	try {
@@ -46,7 +47,7 @@ const fetchData = async () => {
 		const data = await res.json();
 		searchWord(data[0]);
 		if (data) {
-			loading.style.display = "none";
+			loader.style.display = "none";
 		}
 	} catch (err) {
 		searchWord(err.message);
@@ -62,6 +63,7 @@ const searchWord = data => {
 		notFound.style.display = "none";
 		searchResult.style.display =
 			"block";
+
 		searchHead.innerHTML = `
 			<div>
 				<strong>${data?.word}</strong>
@@ -71,8 +73,24 @@ const searchWord = data => {
 						: `<p>${data?.phonetic}</p>`
 				}
 			</div>
-			<button class="fa fa-play"></button>
+			<button class="fa fa-play" id="play"></button>
 	`;
+
+		document
+			.querySelector("#play")
+			.addEventListener("click", () => {
+				data?.phonetics?.forEach(
+					phone => {
+						if (phone.audio.trim() == "" || phone.audio == undefined) {
+							alert("No Sound")
+						}
+						else {
+							audio.src = phone.audio;
+						console.log(phone.audio);
+						audio.play();
+					}}
+				);
+			});
 
 		data?.meanings?.forEach(meaning => {
 			const eachMeaning =
