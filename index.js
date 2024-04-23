@@ -38,7 +38,7 @@ const toggleInterface = () => {
 };
 const fetchData = async () => {
 	loader.style.display = "flex";
-	searchResult.style.display = "none";
+	searchResult.classList.remove("show");
 	notFound.style.display = "none";
 	try {
 		const res = await fetch(
@@ -57,12 +57,13 @@ const fetchData = async () => {
 const searchWord = data => {
 	if (data == undefined) {
 		notFound.style.display = "flex";
-		searchResult.style.display = "none";
+		searchResult.classList.remove(
+			"show"
+		);
 		notFound.textContent = "Not Found";
 	} else {
 		notFound.style.display = "none";
-		searchResult.style.display =
-			"block";
+		searchResult.classList.add("show");
 
 		searchHead.innerHTML = `
 			<div>
@@ -81,14 +82,18 @@ const searchWord = data => {
 			.addEventListener("click", () => {
 				data?.phonetics?.forEach(
 					phone => {
-						if (phone.audio.trim() == "" || phone.audio == undefined) {
-							alert("No Sound")
-						}
-						else {
+						if (
+							phone.audio.trim() ==
+								"" ||
+							phone.audio == undefined
+						) {
+							alert("No Sound");
+						} else {
 							audio.src = phone.audio;
-						console.log(phone.audio);
-						audio.play();
-					}}
+							console.log(phone.audio);
+							audio.play();
+						}
+					}
 				);
 			});
 

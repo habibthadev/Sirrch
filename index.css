@@ -107,6 +107,15 @@ main {
 	margin-left: 6px;
 }
 
+.search-result {
+	opacity: 0;
+	transition: all ease 0.5s;
+}
+
+.search-result.show {
+	opacity: 1;
+}
+
 .search-head {
 	display: flex;
 	justify-content: space-between;
