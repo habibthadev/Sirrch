@@ -1,0 +1,16 @@
+{
+	"name": "Sirrch PWA",
+	"short_name": "Sirrch",
+	"description": "An online dictionary for searching meaning, synonmys of words with source created by Habib Adebayo",
+	"icons": [
+		{
+			"src": "icon.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#fff",
+	"background_color": "#1c9b4b"
+}
