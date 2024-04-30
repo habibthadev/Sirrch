@@ -39,6 +39,7 @@ const toggleInterface = () => {
 const fetchData = async () => {
 	loader.style.display = "flex";
 	searchResult.classList.remove("show");
+	searchMeanings.innerHTML = ""
 	notFound.style.display = "none";
 	try {
 		const res = await fetch(
