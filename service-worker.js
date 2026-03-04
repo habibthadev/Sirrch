@@ -6,7 +6,7 @@ const ASSETS = [
   '/index.js',
   '/icon.svg',
   '/favicon.svg',
-  '/og.svg',
+  '/og.png',
   '/manifest.json',
 ];
 
