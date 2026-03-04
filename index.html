@@ -1,105 +1,203 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			http-equiv="X-UA-Compatible"
-			content="IE=edge"
-		/>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<meta
-			name="author"
-			content="Habib Adebayo"
-		/>
-		<meta
-			name="description"
-			content="An online dictionary for searching meaning, synonmys of words with source created by Habib Adebayo"
-		/>
-		<meta
-			name="keywords"
-			content="sirrch, sirrch dictionary, dictionary, word,text, Habib dictionary, Habib Adebayo dictionary, Habib Sirrch, Habib Adebayo	Sirrch, text, search, find, find word, search word"
-		/>
-		<link
-			rel="stylesheet"
-			href="index.css"
-		/>
-		<link
-			rel="manifest"
-			href="./manifest.json"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-		/>
-		<link
-			rel="canonical"
-			href="https://sirrch.netlify.app"
-		/>
-		<title> Sirrch Dictionary </title>
-	</head>
-	<body>
-		<section class="grid">
-			<section class="subgrid">
-				<header>
-					<h1>Sirrch</h1>
-					<div class="toggle">
-						<div class="ball"></div>
-					</div>
-				</header>
-				<main>
-					<div class="search">
-						<input
-							type="text"
-							placeholder="Search for any word..."
-						/>
-						<audio
-							src=""
-							id="audio"
-						></audio>
-						<button
-							class="fa fa-search"
-						></button>
-					</div>
-					<section
-						class="loader"
-					></section>
-					<section
-						class="not-found"
-					></section>
-					<section
-						class="search-result"
-					>
-						<section
-							class="search-head"
-						></section>
-						<section
-							class="search-meanings"
-						></section>
-						<section
-							class="source"
-						></section>
-					</section>
-				</main>
-			</section>
-		</section>
-		<script>
-			if (
-				"serviceWorker" in navigator
-			) {
-				window.addEventListener(
-					"load",
-					function () {
-						navigator.serviceWorker.register(
-							"/service-worker.js"
-						);
-					}
-				);
-			}
-		</script>
-		<script src="./service-worker.js"></script>
-		<script src="index.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="icon.svg" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+
+    <title>Sirrch — Instant Word Definitions, Synonyms & Pronunciation</title>
+    <meta name="description" content="Sirrch is a fast, beautiful online English dictionary. Search any word for instant definitions, phonetics, synonyms, antonyms, and usage examples. Free, offline-ready PWA." />
+    <meta name="keywords" content="dictionary, word definitions, synonyms, antonyms, phonetics, pronunciation, vocabulary, Sirrch, online dictionary, word meaning, English dictionary, word search, free dictionary" />
+    <meta name="author" content="Habib Adebayo" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://sirrch.netlify.app" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sirrch.netlify.app" />
+    <meta property="og:title" content="Sirrch — Instant Word Definitions, Synonyms & Pronunciation" />
+    <meta property="og:description" content="Fast, beautiful word definitions. Search any English word for meanings, phonetics, synonyms, and usage examples. Works offline." />
+    <meta property="og:image" content="https://sirrch.netlify.app/og.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:site_name" content="Sirrch" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://sirrch.netlify.app" />
+    <meta name="twitter:title" content="Sirrch — Instant Word Definitions, Synonyms &amp; Pronunciation" />
+    <meta name="twitter:description" content="Fast, beautiful word definitions. Search any English word for meanings, phonetics, synonyms, and usage examples." />
+    <meta name="twitter:image" content="https://sirrch.netlify.app/og.svg" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Sirrch",
+          "url": "https://sirrch.netlify.app",
+          "description": "Fast, beautiful online English dictionary for instant word definitions, phonetics, synonyms, and usage examples.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://sirrch.netlify.app/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Sirrch Dictionary",
+          "url": "https://sirrch.netlify.app",
+          "description": "Fast, beautiful online English dictionary. Search any word for definitions, phonetics, synonyms, antonyms, and usage examples.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript",
+          "isAccessibleForFree": true,
+          "author": {
+            "@type": "Person",
+            "name": "Habib Adebayo"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Sirrch" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="app">
+
+      <header class="header">
+        <div class="logo">
+          <span class="logo-text">Sirrch</span>
+        </div>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+          <i class="ti ti-moon" id="themeIcon"></i>
+        </button>
+      </header>
+
+      <main class="main">
+
+        <section class="hero">
+          <h1 class="hero-heading">Discover any word</h1>
+          <p class="hero-sub">Definitions, phonetics, synonyms — instantly.</p>
+          <div class="search-wrap">
+            <div class="search-box" id="searchBox">
+              <i class="ti ti-search search-icon"></i>
+              <input
+                type="text"
+                id="searchInput"
+                class="search-input"
+                placeholder="Search any word…"
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Search for a word"
+              />
+              <button class="search-btn" id="searchBtn" aria-label="Search">
+                <i class="ti ti-arrow-right"></i>
+              </button>
+            </div>
+            <div class="recent-row" id="recentRow"></div>
+          </div>
+        </section>
+
+        <section class="empty-state" id="emptyState">
+          <div class="state-inner">
+            <div class="state-icon">
+              <i class="ti ti-book-2"></i>
+            </div>
+            <p class="state-title">Start with a word</p>
+            <p class="state-sub">Try searching for a word you're curious about.</p>
+            <div class="suggestion-chips">
+              <button class="chip chip-suggest" data-word="ephemeral">ephemeral</button>
+              <button class="chip chip-suggest" data-word="serendipity">serendipity</button>
+              <button class="chip chip-suggest" data-word="eloquent">eloquent</button>
+              <button class="chip chip-suggest" data-word="resilient">resilient</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="error-state" id="errorState" hidden>
+          <div class="state-inner">
+            <div class="state-icon state-icon--error">
+              <i class="ti ti-book-off"></i>
+            </div>
+            <p class="state-title" id="errorTitle">Word not found</p>
+            <p class="state-sub" id="errorSub">Check the spelling or try a different word.</p>
+            <button class="reset-btn" id="tryAgainBtn">
+              <i class="ti ti-search"></i>
+              Try another word
+            </button>
+          </div>
+        </section>
+
+        <section class="results" id="results" hidden>
+          <audio id="audio"></audio>
+
+          <div class="word-header">
+            <div class="word-info">
+              <h2 class="word-title" id="wordTitle"></h2>
+              <span class="phonetic" id="phonetic"></span>
+            </div>
+            <button class="play-btn" id="playBtn" aria-label="Play pronunciation" hidden>
+              <i class="ti ti-volume" id="playIcon"></i>
+            </button>
+          </div>
+
+          <div class="meanings-list" id="meaningsList"></div>
+
+          <footer class="source-footer" id="sourceFooter" hidden>
+            <span class="source-label">
+              <i class="ti ti-link"></i>
+              Source
+            </span>
+            <div class="source-links" id="sourceLinks"></div>
+          </footer>
+        </section>
+
+      </main>
+
+      <footer class="site-footer">
+        <p>
+          Built by <a href="https://habibthadev.tech" target="_blank" rel="noopener noreferrer">Habib Adebayo</a>
+          &middot;
+          Data from <a href="https://dictionaryapi.dev" target="_blank" rel="noopener noreferrer">Free Dictionary API</a>
+        </p>
+      </footer>
+
+    </div>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }
+    </script>
+    <script src="index.js"></script>
+  </body>
 </html>
